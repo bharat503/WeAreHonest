@@ -1,9 +1,12 @@
 package com.example.WeAreHonest;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,5 +40,25 @@ public class AdminService {
 
 		return "deleted";
 	}
+
+
+	public String adminlogin(String username, String password) {
+	     System.out.println(username+" "+password);
+		  String cmd = "select count(*) cnt from admin where ad_username=? "
+	                + " AND ad_pwd=?";
+	        List str=jdbc.query(cmd,new Object[] {username,password}, new RowMapper() {
+	            @Override
+	            public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+	                // TODO Auto-generated method stub
+	                return rs.getInt("cnt");
+	            }
+	            
+	        });
+	        return str.get(0).toString();
+		
+	}
+
+
+	
 	
 }

@@ -33,6 +33,10 @@ public class MainController {
 	public String querydata(@PathVariable String query) {
 		return esc.getquery(query);
 	}
+	@GetMapping("/adminlogin/{username}/{password}")
+	public String AdminLogin(@PathVariable String username,@PathVariable String password) {
+		return admin.adminlogin(username,password);
+	}
 	
 	@RequestMapping(value = "/emp/{id}", method = RequestMethod.DELETE)
 	 public String deleteLocation(@PathVariable int id) {
